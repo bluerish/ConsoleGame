@@ -1,0 +1,2 @@
+C:\Users\rhmeg\source\repos\ConsoleGame\Debug\ConsoleGame.exe
+C:\Users\rhmeg\source\repos\ConsoleGame\Debug\ConsoleGame.pdb
