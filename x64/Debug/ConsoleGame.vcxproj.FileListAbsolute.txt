@@ -1,0 +1,2 @@
+C:\Users\rhmeg\OneDrive\바탕 화면\Project\GitHub\ConsolGame\x64\Debug\ConsoleGame.exe
+C:\Users\rhmeg\OneDrive\바탕 화면\Project\GitHub\ConsolGame\x64\Debug\ConsoleGame.pdb
