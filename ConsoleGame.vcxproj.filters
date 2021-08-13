@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\오브젝트">
+      <UniqueIdentifier>{9b29c0bd-dec1-451b-90d0-3eb92c844760}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleGame.cpp">
@@ -24,16 +27,25 @@
     <ClCompile Include="Game.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Maps.cpp">
+      <Filter>소스 파일\오브젝트</Filter>
+    </ClCompile>
+    <ClCompile Include="Words.cpp">
+      <Filter>소스 파일\오브젝트</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConsoleGame.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="Tools.h">
       <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Maps.h">
+      <Filter>소스 파일\오브젝트</Filter>
+    </ClInclude>
+    <ClInclude Include="Words.h">
+      <Filter>소스 파일\오브젝트</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

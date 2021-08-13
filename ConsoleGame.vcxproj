@@ -115,7 +115,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,12 +141,15 @@
   <ItemGroup>
     <ClCompile Include="ConsoleGame.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Maps.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="Words.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConsoleGame.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Maps.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="Words.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
