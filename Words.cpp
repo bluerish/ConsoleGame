@@ -24,4 +24,19 @@ void Word::getWordLocation(int row, int col, int direction) {
 	}
 }
 
+void Word::operator=(Word item) {
 
+	for (int i = 0; i < item.length; i++) {
+		spell[i] = item.spell[i];
+	}
+
+	length = item.length;
+	this->info = item.info;
+}
+
+void getWordName(string name);
+
+
+void Word::getWordInfo(string info){
+	this->info = info;
+}

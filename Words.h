@@ -19,6 +19,10 @@ public:
 		location[0] = row;
 		location[1] = col;
 	}
+
+	void operator=(Letters item) {
+		letter = item.letter;
+	}
 };
 
 
@@ -31,7 +35,7 @@ public:
 
 	Word(string name = "..." , string info = "...");
 	void getWordLocation(int row, int col, int direction);
+	void operator=(Word item);
 	void getWordName(string name);
-	void getWordInfo
- 
+	void getWordInfo(string info);
 };

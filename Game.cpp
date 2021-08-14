@@ -2,18 +2,13 @@
 
 
 int tempMap[20][30]; //임시저장 배열
-
-int map1[5][5] = {
-    {1,1,1,1,1},
-    {1,1,1,1,1},
-    {1,1,1,1,1},
-    {1,1,1,1,1},
-    {1,1,1,1,1}
-};
+Map tempDefault;
+int correct = 0;
+Word tempWord;
 
 
-
-
+vector<Word> easyW1{ cat, game, egg };
+//Map easyMW1(easyM1, easyW1);
 
 int KeyControl() {
     char temp = _getch();
@@ -27,6 +22,14 @@ int KeyControl() {
     case 's':
     case 'S':
         return DOWN;
+        break;
+    case 'a':
+    case 'A':
+        return LEFT;
+        break;
+    case 'd':
+    case 'D':
+        return RIGHT;
         break;
     case ' ':
         return SUBMIT;
@@ -161,33 +164,57 @@ void drawMap() {
     }
 }
 
-void drawUI() {
+void drawUI(Word UI) {
+    system("cls");
     Gotoxy(2, 22);
-    cout << "설명이 나옵니다.";
+    cout << UI.info;
 }
 
 
 void GameLoop(int mapCode) {
     int isPlaying = 1; //1이면 게임중, 0이면 게임 종료
+    bool infoEnd = true;
 
     switch (mapCode) {
-    case 0:
-        memcpy(tempMap, easy1, sizeof(tempMap));
+    case 0: {
+        tempDefault.SaveData(easyM1, easyW1);            
+        memcpy(tempMap, tempDefault.map, sizeof(tempMap));
         break;
+    }
     case 1:
         break;
     }
-
-    drawMap();
+   
     CursorVisible(1);
+    tempDefault.ResetList();
+    tempDefault.GetCurrentItem(tempWord);
 
     while (isPlaying) {
-        drawUI();
+
+        
+        drawUI(tempWord);
+        drawMap();
         Gotoxy(2, 26);
 
+
         switch (KeyControl()) {
+        case RIGHT: {
+            if (infoEnd) {
+                tempDefault.GetNextItem(infoEnd);
+                tempWord.info.clear();
+                tempWord = tempDefault.GetCurrentItem();
+                break;
+            }
+            break;
+        }
+        case LEFT: {
+            tempDefault.GetPreItem(infoEnd);
+            tempDefault.GetCurrentItem(tempWord);
+            break;
+        }
         case SUBMIT:
             isPlaying = 0;
+            break;
         }
     }
 }

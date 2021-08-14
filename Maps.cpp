@@ -1,26 +1,25 @@
 #include "Maps.h"
 
-Map::Map(int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords) {
+Map::Map() {
 
-    length = 0;
+    length = 0;    
     startData = NULL;
     lastData = NULL;
-    currentWord = NULL;
 
+}
+
+void Map::SaveData(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords) {
+    
     //map 저장
-	memcpy(map, mapContent, sizeof(map));
+    memcpy(map, mapContent, sizeof(map));
 
     //단어를 list에 저장
     int previous = 0;
     int current = 0;
 
-
     for (int i = 0; i < gameWords.size(); i++) {
-
+        InsertItem(gameWords[i]);
     }
-
-
-
 }
 
 void Map::InsertItem(Word item)
@@ -32,9 +31,7 @@ void Map::InsertItem(Word item)
     location->word = item;
 
     if (startData == NULL) {
-        location->back = NULL;
-        location->next = NULL;
-        startData = location;
+        startData = location;       
     }
     else {
         location->back = lastData;
@@ -46,12 +43,34 @@ void Map::InsertItem(Word item)
     length++;
 }
 
-void Map::GetNextItem(Word& item)
+void Map::GetNextItem(bool& isEnd)
 // Post:  Current position has been updated; item is current item.
-{
+{  
+    if (currentWord == lastData) {
+        isEnd = false;
+    }
+    else {
+        currentWord = currentWord->next;
+        isEnd = true;
+    }
+}
 
-    currentWord = currentWord->next;
+void Map::GetPreItem(bool& isEnd){
+  
+    if (currentWord == startData) {
+        isEnd = false;
+    }
+    else {
+        isEnd = true;
+    }
+}
+
+void Map::GetCurrentItem(Word& item) {
     item = currentWord->word;
+}
+
+Word Map::GetCurrentItem() {
+    return currentWord->word;
 }
 
 
@@ -60,17 +79,18 @@ Map::~Map()
 {
     MakeEmpty();
 }
+
 void Map::MakeEmpty()
 // Post: List is empty; all items have been deallocated.
 {
     WordType* tempPtr;
 
-    while (lastData != NULL)
-    {
+    for (int i = 0; i < length; i++) {
         tempPtr = startData;
         startData = startData->next;
         delete tempPtr;
     }
+
     length = 0;
 }
 

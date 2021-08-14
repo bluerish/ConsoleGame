@@ -24,9 +24,14 @@ public:
 	int map[HEIGHT-10][WIDTH];
     int length;
 
-	Map(int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords);
+	//Map(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords);
+    Map();
+    void SaveData(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords);
     void InsertItem(Word item);
-    void GetNextItem(Word& item);
+    void GetNextItem(bool& isEnd);
+    void GetPreItem(bool& isEnd);
+    Word GetCurrentItem();
+    void GetCurrentItem(Word& item);
 
     ~Map();
     void MakeEmpty();
@@ -35,13 +40,15 @@ public:
 
 };
 
-Word cat("cat", "고양이");
-Word game("game", "게임");
-Word egg("egg", "달걀");
+const Word cat("cat", "고양이");
+const Word game("game", "게임");
+const Word egg("egg", "달걀");
 
-vector<Word> easyW1 {cat, game, egg};
 
-const int easy1[HEIGHT - 10][WIDTH] = {
+
+
+
+const int easyM1[HEIGHT - 10][WIDTH] = {
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -63,3 +70,5 @@ const int easy1[HEIGHT - 10][WIDTH] = {
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
+
+
