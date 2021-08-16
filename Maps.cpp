@@ -20,6 +20,25 @@ void Map::SaveData(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameW
     for (int i = 0; i < gameWords.size(); i++) {
         InsertItem(gameWords[i]);
     }
+
+    //단어의 방향 지정
+    
+}
+
+void Map::SaveData(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords, vector<int>& gameDir) {
+    //map 저장
+    memcpy(map, mapContent, sizeof(map));
+
+    //단어를 list에 저장
+    int previous = 0; 
+    int current = 0;
+
+    for (int i = 0; i < gameWords.size(); i++) {
+        InsertItem(gameWords[i]);
+        lastData->word.getWordLocation(gameDir[3*i], gameDir[3*i + 1], gameDir[3*i+ 2]);
+    }
+
+    //단어의 방향 지정
 }
 
 void Map::InsertItem(Word item)
@@ -61,6 +80,7 @@ void Map::GetPreItem(bool& isEnd){
         isEnd = false;
     }
     else {
+        currentWord = currentWord->back;
         isEnd = true;
     }
 }

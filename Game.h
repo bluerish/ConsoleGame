@@ -13,7 +13,9 @@ void InfoDraw();
 
 int MaplistDraw();
 void drawMap();
-void drawUI();
+void drawUI(Word& UI);
+
+void ChangeMapState(Word& w);
 
 void GameLoop(int);
 

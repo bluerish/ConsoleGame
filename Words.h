@@ -12,16 +12,26 @@ class Letters {
 	int location[2];
 
 public:
-	void getLetterSpelling(char letter) {
+	void setLetterSpelling(char letter) {
 		this->letter = letter;
 	}
-	void getLetterLocation(int row, int col) {
+	void setLetterLocation(int row, int col) {
 		location[0] = row;
 		location[1] = col;
 	}
 
+	void getLetterSpelling(char& letter) {
+		letter = this->letter;
+	}
+	void getLetterLocation(int& row, int& col) {
+		row = location[0];
+		col = location[1];
+	}
+
 	void operator=(Letters item) {
 		letter = item.letter;
+		location[0] = item.location[0];
+		location[1] = item.location[1];
 	}
 };
 

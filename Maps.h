@@ -27,6 +27,7 @@ public:
 	//Map(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords);
     Map();
     void SaveData(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords);
+    void SaveData(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords, vector<int>& gameDir);
     void InsertItem(Word item);
     void GetNextItem(bool& isEnd);
     void GetPreItem(bool& isEnd);

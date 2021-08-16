@@ -8,6 +8,8 @@ Word tempWord;
 
 
 vector<Word> easyW1{ cat, game, egg };
+vector<int> D1{3,6,-1,4,4,1,6,6,-1};
+int easyD1[3][3] = { {3,6,-1},{4,4,1},{6,6,-1}};
 //Map easyMW1(easyM1, easyW1);
 
 int KeyControl() {
@@ -145,8 +147,8 @@ int MaplistDraw() {
 //
 
 void drawMap() {
-    system("cls");
     int h, w, temp = -1;
+    system("cls");
 
     for (h = 0; h < HEIGHT-10; h++) {
         for (w = 0; w < WIDTH; w++) {
@@ -164,8 +166,10 @@ void drawMap() {
     }
 }
 
-void drawUI(Word UI) {
-    system("cls");
+void drawUI(Word& UI) {
+    Gotoxy(2, 22);
+    cout << "                          " << endl;
+    cout << "                                 " << endl;
     Gotoxy(2, 22);
     cout << UI.info;
 }
@@ -177,7 +181,7 @@ void GameLoop(int mapCode) {
 
     switch (mapCode) {
     case 0: {
-        tempDefault.SaveData(easyM1, easyW1);            
+        tempDefault.SaveData(easyM1, easyW1, D1);            
         memcpy(tempMap, tempDefault.map, sizeof(tempMap));
         break;
     }
@@ -189,32 +193,58 @@ void GameLoop(int mapCode) {
     tempDefault.ResetList();
     tempDefault.GetCurrentItem(tempWord);
 
+    drawMap();
+    drawUI(tempWord);
+
+
     while (isPlaying) {
 
-        
-        drawUI(tempWord);
-        drawMap();
+
+        //drawMap();
+        //drawUI(tempWord);        
         Gotoxy(2, 26);
 
 
         switch (KeyControl()) {
         case RIGHT: {
+            tempDefault.GetNextItem(infoEnd);
             if (infoEnd) {
-                tempDefault.GetNextItem(infoEnd);
                 tempWord.info.clear();
                 tempWord = tempDefault.GetCurrentItem();
+                ChangeMapState(tempWord);
+                drawMap();
+                drawUI(tempWord);  
                 break;
             }
             break;
         }
         case LEFT: {
             tempDefault.GetPreItem(infoEnd);
-            tempDefault.GetCurrentItem(tempWord);
+            if (infoEnd) {
+                tempWord.info.clear();
+                tempWord = tempDefault.GetCurrentItem();
+                drawMap();
+                drawUI(tempWord);
+                break;
+            }
             break;
         }
         case SUBMIT:
             isPlaying = 0;
             break;
         }
+    }
+}
+
+void ChangeMapState(Word& w) {
+    int row, col;
+    char letter;
+
+    for (int i = 0; i < w.length; i++) {
+        w.spell[i].getLetterLocation(row, col);
+
+        w.spell[i].getLetterSpelling(letter);
+        cout << row << " " << col << " " << letter << endl;
+        tempMap[row][col] = (int)letter;
     }
 }
