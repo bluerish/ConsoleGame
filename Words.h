@@ -42,10 +42,10 @@ public:
 	Letters spell[16];
 	string info;
 	int length;
+	bool answer;
 
 	Word(string name = "..." , string info = "...");
 	void getWordLocation(int row, int col, int direction);
 	void operator=(Word item);
-	void getWordName(string name);
 	void getWordInfo(string info);
 };

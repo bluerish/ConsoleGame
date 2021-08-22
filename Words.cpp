@@ -9,6 +9,7 @@ Word::Word(string name, string info) {
 
 	length = name.length();
 	this->info = info;
+	answer = false;
 }
 
 void Word::getWordLocation(int row, int col, int direction) {
@@ -33,9 +34,8 @@ void Word::operator=(Word item) {
 
 	length = item.length;
 	this->info = item.info;
+	this->answer = item.answer;
 }
-
-void getWordName(string name);
 
 
 void Word::getWordInfo(string info){

@@ -2,28 +2,12 @@
 
 Map::Map() {
 
-    length = 0;    
+    mapLength = 0;    
     startData = NULL;
     lastData = NULL;
 
 }
 
-void Map::SaveData(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords) {
-    
-    //map 저장
-    memcpy(map, mapContent, sizeof(map));
-
-    //단어를 list에 저장
-    int previous = 0;
-    int current = 0;
-
-    for (int i = 0; i < gameWords.size(); i++) {
-        InsertItem(gameWords[i]);
-    }
-
-    //단어의 방향 지정
-    
-}
 
 void Map::SaveData(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameWords, vector<int>& gameDir) {
     //map 저장
@@ -35,7 +19,7 @@ void Map::SaveData(const int mapContent[HEIGHT - 10][WIDTH], vector<Word>& gameW
 
     for (int i = 0; i < gameWords.size(); i++) {
         InsertItem(gameWords[i]);
-        lastData->word.getWordLocation(gameDir[3*i], gameDir[3*i + 1], gameDir[3*i+ 2]);
+        lastData->word.getWordLocation(gameDir[int(3)*i], gameDir[int(3) * i+1], gameDir[int(3) * i + 2]);
     }
 
     //단어의 방향 지정
@@ -59,7 +43,7 @@ void Map::InsertItem(Word item)
     }
 
     lastData = location;
-    length++;
+    mapLength++;
 }
 
 void Map::GetNextItem(bool& isEnd)
@@ -85,9 +69,6 @@ void Map::GetPreItem(bool& isEnd){
     }
 }
 
-void Map::GetCurrentItem(Word& item) {
-    item = currentWord->word;
-}
 
 Word Map::GetCurrentItem() {
     return currentWord->word;
@@ -105,13 +86,13 @@ void Map::MakeEmpty()
 {
     WordType* tempPtr;
 
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < mapLength; i++) {
         tempPtr = startData;
         startData = startData->next;
         delete tempPtr;
     }
 
-    length = 0;
+    mapLength = 0;
 }
 
 

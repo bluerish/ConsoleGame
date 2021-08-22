@@ -3,7 +3,7 @@
 #include"Maps.h"
 #include <conio.h>
 
-enum { UP, DOWN, LEFT, RIGHT, SUBMIT };
+enum { UP, DOWN, EXIT, SUBMIT };
 
 int KeyControl();
 
@@ -16,6 +16,7 @@ void drawMap();
 void drawUI(Word& UI);
 
 void ChangeMapState(Word& w);
+int isCorrect(Word& w, vector<char>& playerAnswer);
 
 void GameLoop(int);
 

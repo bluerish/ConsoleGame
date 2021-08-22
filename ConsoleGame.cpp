@@ -28,6 +28,13 @@ int main()
 
     //}
     //
+    //vector<int> D{ 3,6,-1,4,4,1,6,6,-1 };
+
+    //for (int i = 0; i < 3; i++) {
+    //    cout << D[int(3) * i] << " " << D[int(3) * i+1] << " " << D[int(3) * i+2] << " " << endl;
+    //}
+
+
 
     Init();
 
@@ -56,6 +63,7 @@ int main()
             case 2:
                 cout << " 어려움 선택함" << endl;
                 Sleep(1000);
+                GameLoop(2);
                 break;
             defalut:
                 break;
