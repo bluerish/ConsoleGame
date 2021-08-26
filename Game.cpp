@@ -10,8 +10,16 @@ Word tempWord;
 vector<Word> easyW1{ cat, game, egg };
 vector<int> easyD1{3,4,1,2,5,-1,5,5,1};
 
+vector<Word> easyW2{ rain, night,hat, ant };
+vector<int> easyD2{ 4,16,-1,6,15,1, 6,18,-1,4,19,-1 };
+
+vector<Word> easyW3{ fire, rhythm, bicycle };
+vector<int> easyD3{10,8,1,10,10,-1,12,7,1};
+
 vector<Word> normalW1{ table, teapot, octopus, sunglasses, banana };
 vector<int> normalD1{ 2, 3,1, 2,3,-1,6,3,1,6,9,-1,11,8,1 };
+
+
 
 
 int KeyControl() {
@@ -195,6 +203,53 @@ void drawUI(Word& UI) {
     cout << UI.info;
 }
 
+void setMapCode(int mapCode) {
+    int randCode;
+    randCode = rand() % 3;
+
+    if (mapCode == 0) {
+        if (randCode == 0) {
+            tempDefault.SaveData(easyM1, easyW1, easyD1);
+            memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        }
+        else if (randCode == 1) {
+            tempDefault.SaveData(easyM2, easyW2, easyD2);
+            memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        }
+        else if (randCode == 2) {
+            tempDefault.SaveData(easyM3, easyW3, easyD3);
+            memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        }
+    }
+    else if (mapCode == 1) {
+        tempDefault.SaveData(normalM1, normalW1, normalD1);
+        memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+
+        //if (randCode == 0) {
+        //    tempDefault.SaveData(easyM1, easyW1, easyD1);
+        //    memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        //}
+        //else if (randCode == 1) {
+        //    tempDefault.SaveData(easyM2, easyW2, easyD2);
+        //    memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        //}
+    }
+    else if (mapCode == 0) {
+        tempDefault.SaveData(normalM1, normalW1, normalD1);
+        memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+
+        //if (randCode == 0) {
+        //    tempDefault.SaveData(easyM1, easyW1, easyD1);
+        //    memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        //}
+        //else if (randCode == 1) {
+        //    tempDefault.SaveData(easyM2, easyW2, easyD2);
+        //    memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        //    break;
+        //}
+    }
+
+}
 
 void GameLoop(int mapCode) {
     int isPlaying = 1; //1이면 게임중, 0이면 게임 종료
@@ -204,24 +259,8 @@ void GameLoop(int mapCode) {
     vector<char> playerAnswer;
     int keyC;
 
+    setMapCode(mapCode);
 
-    switch (mapCode) {
-    case 0: {
-        tempDefault.SaveData(easyM1, easyW1, easyD1);            
-        memcpy(tempMap, tempDefault.map, sizeof(tempMap));
-        break;
-    }
-    case 1:{
-        tempDefault.SaveData(normalM1, normalW1, normalD1);
-        memcpy(tempMap, tempDefault.map, sizeof(tempMap));
-        break;
-    }
-    case 2: {
-        tempDefault.SaveData(easyM1, easyW1, easyD1);
-        memcpy(tempMap, tempDefault.map, sizeof(tempMap));
-        break;
-    }
-}
    
     CursorVisible(1);
     tempDefault.ResetList();
