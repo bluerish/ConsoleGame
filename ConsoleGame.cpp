@@ -14,27 +14,6 @@
 
 int main()
 {
-    //vector<Word> easy{ cat, game, egg };
-    //Map m;
-    //m.SaveData(easyM1, easy);
-    //Word w;
-    //bool i=true;
-    //m.ResetList();
-
-    //while (i) {
-    //    m.GetCurrentItem(w);
-    //    cout << w.info << " ";
-    //    m.GetNextItem(w, i);
-
-    //}
-    //
-    //vector<int> D{ 3,6,-1,4,4,1,6,6,-1 };
-
-    //for (int i = 0; i < 3; i++) {
-    //    cout << D[int(3) * i] << " " << D[int(3) * i+1] << " " << D[int(3) * i+2] << " " << endl;
-    //}
-
-
 
     Init();
 

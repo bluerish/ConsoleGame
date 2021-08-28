@@ -75,6 +75,11 @@ Word Map::GetCurrentItem() {
 }
 
 
+void Map::SaveAnswer() {
+    currentWord->word.answer = true;
+}
+
+
 Map::~Map()
 // Class destructor
 {

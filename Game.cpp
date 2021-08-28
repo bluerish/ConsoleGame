@@ -19,6 +19,20 @@ vector<int> easyD3{10,8,1,10,10,-1,12,7,1};
 vector<Word> normalW1{ table, teapot, octopus, sunglasses, banana };
 vector<int> normalD1{ 2, 3,1, 2,3,-1,6,3,1,6,9,-1,11,8,1 };
 
+vector<Word> normalW2{ wallet, tissue, mask, mango, penguin, pencil };
+vector<int> normalD2{3,4,-1,8,4,1,6,6,-1,6,6,1,4,8,-1,4,8,1};
+
+vector<Word> normalW3{spoon, rose, curtain, chair,airplane,ruler };
+vector<int> normalD3{3,12,-1,5,11,1,7,6,1,7,6,-1,7,10,-1,11,8,1};
+
+vector<Word> hardW1{ aquarium,mosquito,museum,monument,navigation,vegetable, apple};
+vector<int> hardD1{2,7,-1,3,4,1,3,4,-1,8,4,1,8,10,-1,10,10,1,10,15,-1};
+
+vector<Word> hardW2{blizzard,pizza, doughnut, playground, classroom,radio,sword,omelet };
+vector<int> hardD2{ 4,7,1,2,10,-1,4,14,-1,10,7,1,9,8,-1,10,12,-1,12,8,1,14,12,1 };
+
+vector<Word> hardW3{ patient,physics,chemistry,mercury,psychology,sapphire,pearl };
+vector<int> hardD3{ 3,4,1,3,4,-1,8,4,1, 8,7,-1,6,12,-1,7,12,1,6,19,-1};
 
 
 
@@ -204,8 +218,13 @@ void drawUI(Word& UI) {
 }
 
 void setMapCode(int mapCode) {
-    int randCode;
-    randCode = rand() % 3;
+    int randCode=0;
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<int> dis(0,2);
+
+    randCode = dis(gen);
 
     if (mapCode == 0) {
         if (randCode == 0) {
@@ -222,31 +241,32 @@ void setMapCode(int mapCode) {
         }
     }
     else if (mapCode == 1) {
-        tempDefault.SaveData(normalM1, normalW1, normalD1);
-        memcpy(tempMap, tempDefault.map, sizeof(tempMap));
-
-        //if (randCode == 0) {
-        //    tempDefault.SaveData(easyM1, easyW1, easyD1);
-        //    memcpy(tempMap, tempDefault.map, sizeof(tempMap));
-        //}
-        //else if (randCode == 1) {
-        //    tempDefault.SaveData(easyM2, easyW2, easyD2);
-        //    memcpy(tempMap, tempDefault.map, sizeof(tempMap));
-        //}
+        if (randCode == 0) {
+            tempDefault.SaveData(normalM1, normalW1, normalD1);
+            memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        }
+        else if (randCode == 1) {
+            tempDefault.SaveData(normalM2, normalW2, normalD2);
+            memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        }
+        else if (randCode == 2) {
+            tempDefault.SaveData(normalM3, normalW3, normalD3);
+            memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        }
     }
-    else if (mapCode == 0) {
-        tempDefault.SaveData(normalM1, normalW1, normalD1);
-        memcpy(tempMap, tempDefault.map, sizeof(tempMap));
-
-        //if (randCode == 0) {
-        //    tempDefault.SaveData(easyM1, easyW1, easyD1);
-        //    memcpy(tempMap, tempDefault.map, sizeof(tempMap));
-        //}
-        //else if (randCode == 1) {
-        //    tempDefault.SaveData(easyM2, easyW2, easyD2);
-        //    memcpy(tempMap, tempDefault.map, sizeof(tempMap));
-        //    break;
-        //}
+    else if (mapCode == 2) {
+        if (randCode == 0) {
+            tempDefault.SaveData(hardM1, hardW1, hardD1);
+            memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        }
+        else if (randCode == 1) {
+            tempDefault.SaveData(hardM2, hardW2, hardD2);
+            memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        }
+        else if (randCode == 2) {
+            tempDefault.SaveData(hardM3, hardW3, hardD3);
+            memcpy(tempMap, tempDefault.map, sizeof(tempMap));
+        }
     }
 
 }
@@ -334,13 +354,14 @@ void GameLoop(int mapCode) {
                 Sleep(2000);
             }
             else {
-                answerNum = answerNum + isCorrect(tempWord, playerAnswer);                
+                if (isCorrect(tempWord, playerAnswer)) {
+                    answerNum++;
+                    ChangeMapState(tempWord);
+                }                                
             }
-
-            playerAnswer.clear();      
-            ChangeMapState(tempWord);
             drawMap();
             drawUI(tempWord);
+            playerAnswer.clear();      
             Gotoxy(2, 26);
 
 
@@ -390,7 +411,7 @@ void ChangeMapState(Word& w) {
     }
 }
 
-int isCorrect(Word& w, vector<char>& playerAnswer) {
+bool isCorrect(Word& w, vector<char>& playerAnswer) {
 
     if (w.length == playerAnswer.size()) {
         char c;
@@ -399,17 +420,18 @@ int isCorrect(Word& w, vector<char>& playerAnswer) {
             if (c != playerAnswer[i]) {
                 cout << " 은 정답이 아닙니다." << endl;
                 Sleep(2000);
-                return 0;
+                return false;
             }
         }
         cout << " 은 정답입니다!" << endl;
         w.answer = true;
+        tempDefault.SaveAnswer();
         Sleep(2000);
-        return 1;
+        return true;
     }
     else {
         cout << " 은 정답이 아닙니다." << endl;
         Sleep(2000);
-        return 0;
+        return false;
     }
 }

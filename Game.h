@@ -17,7 +17,7 @@ void drawMap();
 void drawUI(Word& UI);
 
 void ChangeMapState(Word& w);
-int isCorrect(Word& w, vector<char>& playerAnswer);
+bool isCorrect(Word& w, vector<char>& playerAnswer);
 
 void setMapCode(int mapCode);
 void GameLoop(int);
